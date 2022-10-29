@@ -1,10 +1,4 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 defineProps({
@@ -26,42 +20,77 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
+    <main class="main-content" style="height: 100vh">
+        <div class="signUP-admin">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="">
+                        <div class="signUP-admin-left position-relative h-100vh">
+                            <div class="signUP-admin-left__content">
+                                <h1>NEPA-CRM</h1>
+                            </div>
+                        </div><!-- End: .signUP-admin-left -->
+                    </div><!-- End: .col -->
+                    <div class="mt-5">
+                        <div class="signUp-admin-right content-center h-100 pb-30">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8 col-sm-10">
+                                    <div class="edit-profile mt-0">
+                                        <div class="card border-0">
+                                            <div class="card-header border-0 pt-0 pb-0">
+                                                <div class="signUp-header-top mt-md-0 mt-30">
+                                                    <h6>Login to <span class="color-primary">Dashboard</span></h6>
+                                                    <p class="mt-md-45 mt-20">Enter E-mail and Password</p>
+                                                    <p class="mb-0"> <strong>
+                                                        Don't have an account?
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
+                                                        <Link href="/register" class="color-primary">
+                                                            Sign up
+                                                        </Link>
+                                                    </strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="card border-0">
+                                                <div class="card-body">
+                                                    <div class="edit-profile__body">
+                                                        <div class="form-group mb-20" style="width: 400px">
+                                                            <label for="username">Username or Email Address</label>
+                                                            <input type="text" class="form-control" id="username" placeholder="Enter username or email">
+                                                        </div>
+                                                        <div class="form-group mb-15">
+                                                            <label for="password-field">password</label>
+                                                            <div class="position-relative">
+                                                                <input id="password-field" type="password" placeholder="Enter password" class="form-control" name="password" value="">
+                                                                <div class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="signUp-condition signIn-condition">
+                                                            <div class="checkbox-theme-default custom-checkbox ">
+                                                                <input class="checkbox" type="checkbox" id="check-1">
+                                                                <label for="check-1">
+                                                                    <span class="checkbox-text">Keep me logged in</span>
+                                                                </label>
+                                                            </div>
+                                                            <a href="forget-password.html" class="ml-2">forget password</a>
+                                                        </div>
+                                                        <div class="button-group d-flex pt-1 justify-content-md-start justify-content-center">
+                                                            <button class="btn btn-primary btn-default btn-squared  text-capitalize lh-normal px-50 py-15 signIn-createBtn " onclick="window.location.href='dashboard.html';">
+                                                                Login
+                                                            </button>
+                                                        </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
-                <InputError class="mt-2" :message="form.errors.email" />
+                                                    </div>
+                                                </div><!-- End: .card-body -->
+                                            </div><!-- End: .card -->
+                                        </div><!-- End: .card -->
+                                    </div><!-- End: .edit-profile -->
+                                </div><!-- End: col -->
+                            </div>
+                        </div><!-- End: .signUp-admin-right -->
+                    </div><!-- End: .col -->
+                </div>
             </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+        </div><!-- End: .signUP-admin -->
+    </main>
 </template>
