@@ -20,19 +20,19 @@ const submit = () => {
 </script>
 
 <template>
-    <main class="main-content" style="height: 100vh">
+    <main class="main-content" style="background-color: white">
         <div class="signUP-admin">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="">
+                    <div class="col-4">
                         <div class="signUP-admin-left position-relative h-100vh">
                             <div class="signUP-admin-left__content">
                                 <h1>NEPA-CRM</h1>
                             </div>
                         </div><!-- End: .signUP-admin-left -->
                     </div><!-- End: .col -->
-                    <div class="mt-5">
-                        <div class="signUp-admin-right content-center h-100 pb-30">
+                    <div class="mt-5 col-8">
+                        <div class="signUp-admin-right h-100 pb-30">
                             <div class="row justify-content-center">
                                 <div class="col-md-8 col-sm-10">
                                     <div class="edit-profile mt-0">
@@ -44,7 +44,7 @@ const submit = () => {
                                                     <p class="mb-0"> <strong>
                                                         Don't have an account?
 
-                                                        <Link href="/register" class="color-primary">
+                                                        <Link href="/signup" class="color-primary">
                                                             Sign up
                                                         </Link>
                                                     </strong>
@@ -54,7 +54,7 @@ const submit = () => {
                                             <div class="card border-0">
                                                 <div class="card-body">
                                                     <div class="edit-profile__body">
-                                                        <div class="form-group mb-20" style="width: 400px">
+                                                        <div class="form-group mb-20">
                                                             <label for="username">Username or Email Address</label>
                                                             <input type="text" class="form-control" id="username" placeholder="Enter username or email">
                                                         </div>

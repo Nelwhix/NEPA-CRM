@@ -5,10 +5,11 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-    return Inertia::render('Auth/Login', [
-        'canResetPassword' => Route::has('password.request'),
-        'status' => session('status'),
-    ]);
+    return Inertia::render('Auth/Login');
+});
+
+Route::get('/signup', function () {
+    return Inertia::render('Auth/Register');
 });
 
 Route::get('/dashboard', function () {
