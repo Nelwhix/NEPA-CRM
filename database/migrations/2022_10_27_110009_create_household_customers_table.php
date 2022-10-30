@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('household_customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
             $table->string('house_address');
             $table->string('state');
             $table->float('total_amount_consumed');

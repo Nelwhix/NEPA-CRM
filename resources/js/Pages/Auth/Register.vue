@@ -6,6 +6,7 @@ import  signUpTop from '/public/images/signupTop.svg'
 </script>
 
 <template>
+    <Head title="Sign Up" />
     <main class="main-content">
         <div class="signUP-admin">
             <div class="container-fluid">
@@ -87,9 +88,9 @@ import  signUpTop from '/public/images/signupTop.svg'
                                                         </div>
                                                     </div>
                                                     <div class="button-group d-flex pt-1 justify-content-md-start justify-content-center">
-                                                        <button class="btn btn-primary btn-default btn-squared text-capitalize lh-normal px-50 py-15 signUp-createBtn signIn-createBtn" onclick="window.location.href='dashboard.html';">
+                                                        <Link href="/signup" as="button" method="post" class="btn btn-primary btn-default btn-squared text-capitalize lh-normal px-50 py-15 signUp-createBtn signIn-createBtn">
                                                             Create Account
-                                                        </button>
+                                                        </Link>
                                                     </div>
 
                                                 </div>

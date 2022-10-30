@@ -1,42 +1,38 @@
 <script setup>
-import { computed } from 'vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
+import envelopeGif from "/public/images/verification-email.gif"
 
-const props = defineProps({
-    status: String,
-});
 
+defineProps({
+        email: String
+})
 const form = useForm();
 
 const submit = () => {
     form.post(route('verification.send'));
 };
-
-const verificationLinkSent = computed(() => props.status === 'verification-link-sent');
 </script>
 
 <template>
-    <GuestLayout>
         <Head title="Email Verification" />
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-        </div>
+    <div class="row justify-content-center mt-5" id="showUp">
+        <div class="col-sm-12">
+            <h6 class="text-center otptxt">
+                <img :src="envelopeGif" width="300"> <br>
+                <br>
+                A Verification Email has been sent to <span> {{ email }} </span>
+            </h6>
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent" >
-            A new verification link has been sent to the email address you provided during registration.
-        </div>
-
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </PrimaryButton>
-
-                <Link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Log Out</Link>
+            <div class="otpBottom text-center">
+                <h4> Expires in 10:00s </h4>
+                <br>
+                <h5>
+                    Didn't get Email? <br><br>
+                    <Link method="post" as="button" :href="route('verification.resend')" class="btn btn-primary btn-default btn-squared mx-auto">Resend
+                    </Link>
+                </h5>
             </div>
-        </form>
-    </GuestLayout>
+        </div>
+    </div>
 </template>

@@ -5,6 +5,7 @@ import  signUpTop from '/public/images/signupTop.svg'
 </script>
 
 <template>
+    <Head title="Log in" />
     <main class="main-content" style="background-color: white">
         <div class="signUP-admin">
             <div class="container-fluid">

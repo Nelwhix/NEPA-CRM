@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('customer_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('household_customer_id')->nullable()->constrained();
+            $table->foreignId('organization_customer_id')->nullable()->constrained();
             $table->longText("complaint");
             $table->enum("status", ["unseen", "seen", "solved"]);
             $table->timestamps();

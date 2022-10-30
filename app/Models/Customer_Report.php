@@ -9,7 +9,11 @@ class Customer_Report extends Model
 {
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function household_customer() {
+        return $this->belongsTo(Household_Customer::class);
+    }
+
+    public function organization_customer() {
+        return $this->belongsTo(Organization_Customer::class);
     }
 }
