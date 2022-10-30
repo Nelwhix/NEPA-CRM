@@ -1,22 +1,7 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import  signUpBottom from '/public/images/signupBottom.svg'
+import  signUpTop from '/public/images/signupTop.svg'
 
-defineProps({
-    canResetPassword: Boolean,
-    status: String,
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
 </script>
 
 <template>
@@ -24,14 +9,18 @@ const submit = () => {
         <div class="signUP-admin">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <div class="signUP-admin-left position-relative h-100vh">
+                            <div class="signUP-overlay">
+                                <img class="svg signupTop" :src="signUpTop" alt="img" />
+                                <img class="svg signupBottom" :src="signUpBottom" alt="img" />
+                            </div><!-- End: .signUP-overlay  -->
                             <div class="signUP-admin-left__content">
                                 <h1>NEPA-CRM</h1>
                             </div>
                         </div><!-- End: .signUP-admin-left -->
                     </div><!-- End: .col -->
-                    <div class="mt-5 col-8">
+                    <div class="mt-5 col-12 col-md-8">
                         <div class="signUp-admin-right h-100 pb-30">
                             <div class="row justify-content-center">
                                 <div class="col-md-8 col-sm-10">
