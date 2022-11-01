@@ -1,8 +1,31 @@
 <script setup>
 import  signUpBottom from '/public/images/signupBottom.svg'
 import  signUpTop from '/public/images/signupTop.svg'
+import { useForm } from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
 
+let form = useForm({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: {
+        password: "",
+        password_confirmed: "",
+    },
+    isOkayWithTerms: false
+});
 
+let refusedTerms = ref(false);
+let showPassword = ref(false);
+let showPasswordConfirmed = ref(false);
+
+let register = () => {
+    if (!form.isOkayWithTerms) {
+        refusedTerms.value = true;
+        return null;
+    }
+    form.post('/signup');
+}
 </script>
 
 <template>
@@ -42,42 +65,51 @@ import  signUpTop from '/public/images/signupTop.svg'
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                <div class="edit-profile__body">
+                                                <form @submit.prevent="register" class="edit-profile__body">
 
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label for="name">Firstname</label>
-                                                                <input type="text" class="form-control" id="name" placeholder="enter here">
+                                                                <input v-model="form.firstName" type="text" class="form-control" id="name" placeholder="enter here">
+                                                                <p v-if="form.errors.firstName" v-text="form.errors.firstName" class="text-xs text-danger"></p>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="name">Lastname</label>
-                                                                <input type="text" class="form-control" id="name" placeholder="enter here">
+                                                                <input v-model="form.lastName" type="text" class="form-control" id="name" placeholder="enter here">
+                                                                <p v-if="form.errors.lastName" v-text="form.errors.lastName" class="text-xs text-danger"></p>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group mb-20">
                                                         <label for="email">Email Address</label>
-                                                        <input type="text" class="form-control" id="email" placeholder="name@example.com">
+                                                        <input v-model="form.email" type="text" class="form-control" id="email" placeholder="name@example.com">
+                                                        <p v-if="form.errors.email" v-text="form.errors.email" class="text-xs text-danger"></p>
                                                     </div>
                                                     <div class="form-group mb-15">
                                                         <label for="password-field">password</label>
                                                         <div class="position-relative">
-                                                            <input id="password-field" type="password" class="form-control" name="password" value="">
-                                                            <span class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            <input v-if="showPassword" v-model="form.password.password" type="text" class="form-control" placeholder="Enter Password">
+                                                            <input v-else v-model="form.password.password" type="password" class="form-control" placeholder="Enter Password">
+                                                            <span v-if="showPassword" @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye text-light fs-16 field-icon toggle-password2"></span>
+                                                            <span v-else @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            <p v-if="form.errors.password" v-text="form.errors.password" class="text-xs text-danger"></p>
                                                         </div>
                                                     </div>
                                                     <div class="form-group mb-15">
                                                         <label for="password-field">Re-type password</label>
                                                         <div class="position-relative">
-                                                            <input id="password-field" type="password" class="form-control" name="password" value="">
-                                                            <span class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            <input v-if="showPasswordConfirmed" v-model="form.password.password_confirmed" type="text" class="form-control" placeholder="Enter Password">
+                                                            <input v-else v-model="form.password.password_confirmed" type="password" class="form-control" placeholder="Enter Password">
+                                                            <span v-if="showPasswordConfirmed" @click="showPasswordConfirmed = !showPasswordConfirmed" class="passwordShow fa fa-fw fa-eye text-light fs-16 field-icon toggle-password2"></span>
+                                                            <span v-else @click="showPasswordConfirmed = !showPasswordConfirmed" class="passwordShow fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            <p v-if="form.errors.password_confirmed" v-text="form.errors.password_confirmed" class="text-xs text-danger"></p>
                                                         </div>
                                                     </div>
                                                     <div class="signUp-condition">
                                                         <div class="checkbox-theme-default custom-checkbox ">
-                                                            <input class="checkbox" type="checkbox" id="check-1">
+                                                            <input v-model="form.isOkayWithTerms" class="checkbox" type="checkbox" id="check-1">
                                                             <label for="check-1">
                                                                 <span class="checkbox-text">Creating an account means you’re okay
                                                                     with our <a href="#" class="color-secondary">Terms of
@@ -85,15 +117,15 @@ import  signUpTop from '/public/images/signupTop.svg'
                                                                         Policy</a>
                                                                     my preference</span>
                                                             </label>
+                                                            <p v-if="refusedTerms" class="text-xs text-danger">This box must be ticked to continue</p>
                                                         </div>
                                                     </div>
                                                     <div class="button-group d-flex pt-1 justify-content-md-start justify-content-center">
-                                                        <Link href="/signup" as="button" method="post" class="btn btn-primary btn-default btn-squared text-capitalize lh-normal px-50 py-15 signUp-createBtn signIn-createBtn">
+                                                        <button type="submit" :disabled="form.processing" class="btn btn-primary btn-default btn-squared text-capitalize lh-normal px-50 py-15 signUp-createBtn signIn-createBtn">
                                                             Create Account
-                                                        </Link>
+                                                        </button>
                                                     </div>
-
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -106,3 +138,13 @@ import  signUpTop from '/public/images/signupTop.svg'
         </div>
     </main>
 </template>
+
+<style>
+    .passwordShow {
+
+    }
+
+    .passwordShow:hover {
+        cursor:pointer;
+    }
+</style>

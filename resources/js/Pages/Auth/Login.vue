@@ -1,7 +1,19 @@
 <script setup>
 import  signUpBottom from '/public/images/signupBottom.svg'
 import  signUpTop from '/public/images/signupTop.svg'
+import { useForm } from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
 
+let form = useForm({
+    email: "",
+    password: "",
+})
+
+let showPassword = ref(false);
+
+let login = () => {
+    form.post('/login');
+}
 </script>
 
 <template>
@@ -43,16 +55,20 @@ import  signUpTop from '/public/images/signupTop.svg'
                                             </div>
                                             <div class="card border-0">
                                                 <div class="card-body">
-                                                    <div class="edit-profile__body">
+                                                    <form @submit.prevent="login" class="edit-profile__body">
                                                         <div class="form-group mb-20">
-                                                            <label for="username">Username or Email Address</label>
-                                                            <input type="text" class="form-control" id="username" placeholder="Enter username or email">
+                                                            <label for="email">Email Address</label>
+                                                            <input v-model="form.email" type="text" class="form-control" id="email" placeholder="name@example.com">
+                                                            <p v-if="form.errors.email" v-text="form.errors.email" class="text-xs text-danger"></p>
                                                         </div>
                                                         <div class="form-group mb-15">
                                                             <label for="password-field">password</label>
                                                             <div class="position-relative">
-                                                                <input id="password-field" type="password" placeholder="Enter password" class="form-control" name="password" value="">
-                                                                <div class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></div>
+                                                                <input id="password-field" v-if="showPassword" v-model="form.password" type="text" placeholder="Enter Password" class="form-control">
+                                                                <input id="password-field" v-else v-model="form.password" type="password" placeholder="Enter Password" class="form-control">
+                                                                <span v-if="showPassword" @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye text-light fs-16 field-icon toggle-password2"></span>
+                                                                <span v-else @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                                <p v-if="form.errors.password" v-text="form.errors.password" class="text-xs text-danger"></p>
                                                             </div>
                                                         </div>
                                                         <div class="signUp-condition signIn-condition">
@@ -70,7 +86,7 @@ import  signUpTop from '/public/images/signupTop.svg'
                                                             </button>
                                                         </div>
 
-                                                    </div>
+                                                    </form>
                                                 </div><!-- End: .card-body -->
                                             </div><!-- End: .card -->
                                         </div><!-- End: .card -->
