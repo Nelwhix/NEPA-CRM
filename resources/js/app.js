@@ -16,7 +16,7 @@ import '../css/bootstrap_assets/css/slick.css'
 import '../css/bootstrap_assets/css/star-rating-svg.css'
 import '../css/bootstrap_assets/css/trumbowyg.min.css'
 import '../css/bootstrap_assets/css/wickedpicker.min.css'
-import '../css/styles.css'
+import '../css/style.css'
 
 import { createApp, h } from 'vue';
 import {createInertiaApp, Head, Link} from '@inertiajs/inertia-vue3';
