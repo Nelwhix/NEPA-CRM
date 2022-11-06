@@ -8,10 +8,8 @@ let form = useForm({
     firstName: "",
     lastName: "",
     email: "",
-    password: {
-        password: "",
-        password_confirmed: "",
-    },
+    password: "",
+    password_confirmation: "",
     isOkayWithTerms: false
 });
 
@@ -90,8 +88,8 @@ let register = () => {
                                                     <div class="form-group mb-15">
                                                         <label for="password-field">password</label>
                                                         <div class="position-relative">
-                                                            <input v-if="showPassword" v-model="form.password.password" type="text" class="form-control" placeholder="Enter Password">
-                                                            <input v-else v-model="form.password.password" type="password" class="form-control" placeholder="Enter Password">
+                                                            <input v-if="showPassword" v-model="form.password" type="text" class="form-control" placeholder="Enter Password">
+                                                            <input v-else v-model="form.password" type="password" class="form-control" placeholder="Enter Password">
                                                             <span v-if="showPassword" @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye text-light fs-16 field-icon toggle-password2"></span>
                                                             <span v-else @click="showPassword = !showPassword" class="passwordShow fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
                                                             <p v-if="form.errors.password" v-text="form.errors.password" class="text-xs text-danger"></p>
@@ -100,11 +98,11 @@ let register = () => {
                                                     <div class="form-group mb-15">
                                                         <label for="password-field">Re-type password</label>
                                                         <div class="position-relative">
-                                                            <input v-if="showPasswordConfirmed" v-model="form.password.password_confirmed" type="text" class="form-control" placeholder="Enter Password">
-                                                            <input v-else v-model="form.password.password_confirmed" type="password" class="form-control" placeholder="Enter Password">
+                                                            <input v-if="showPasswordConfirmed" v-model="form.password_confirmation" type="text" class="form-control" placeholder="Enter Password">
+                                                            <input v-else v-model="form.password_confirmation" type="password" class="form-control" placeholder="Enter Password">
                                                             <span v-if="showPasswordConfirmed" @click="showPasswordConfirmed = !showPasswordConfirmed" class="passwordShow fa fa-fw fa-eye text-light fs-16 field-icon toggle-password2"></span>
                                                             <span v-else @click="showPasswordConfirmed = !showPasswordConfirmed" class="passwordShow fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
-                                                            <p v-if="form.errors.password_confirmed" v-text="form.errors.password_confirmed" class="text-xs text-danger"></p>
+                                                            <p v-if="form.errors.password_confirmation" v-text="form.errors.password_confirmation" class="text-xs text-danger"></p>
                                                         </div>
                                                     </div>
                                                     <div class="signUp-condition">

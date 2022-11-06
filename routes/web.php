@@ -11,9 +11,14 @@ Route::get('/', function () {
 Route::get('/signup', function () {
     return Inertia::render('Auth/Register');
 });
+//
+//Route::get('/dashboard', function () {
+//    return Inertia::render('Dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 require __DIR__.'/auth.php';
